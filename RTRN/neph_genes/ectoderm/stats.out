@@ -1,0 +1,20 @@
+RT network size: 19232 edges
+Neph network size: 20157 edges
+
+
+First: If direction is significant:
+===================================
+RT edges intersection neph edges: 2225
+RT edges minus neph edges: 17007
+neph edges minus RT edges: 17932
+hypergeometric p value: 8.235728910520986e-51
+
+
+Second: If direction is NOT significant:
+=======================================
+RT edges intersection neph edges: 2793
+RT edges minus neph edges: 16439
+neph edges minus RT edges: 17364
+hypergeometric p value: 5.0432389725386335e-180
+
+

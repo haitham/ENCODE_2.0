@@ -1,4 +1,4 @@
 ;e persistence;e specificity;c persistence;c specificity
-ectoderm-mesoderm;0.3555;0.2473;0.63734;0.29543
-ectoderm-endoderm;0.2067;0.14253;0.52221;0.15427
-mesoderm-endoderm;0.25004;0.13442;0.59261;0.23879
+ectoderm-mesoderm;0.11377;-0.25636;0.34542;-0.28433
+ectoderm-endoderm;-0.10732;-0.32728;0.16426;-0.30939
+mesoderm-endoderm;-0.00266;-0.25038;0.21956;-0.36371
