@@ -2,8 +2,8 @@
 #based on the given pearson threshold for creating an edge,
 #and the given stringency to compare for deciding direction
 
-layer, corr_thresh, stringency = ARGV #e.g. allderm 0.75 0.75
-corr_thresh, stringency = corr_thresh.to_f, stringency.to_f
+layer, corr_thresh, stringency, dist_thresh = ARGV #e.g. allderm 0.75 0.75 5000000
+corr_thresh, stringency, dist_thresh = corr_thresh.to_f, stringency.to_f, dist_thresh.to_i
 
 def pearson x, y
 	xbar, ybar = x.reduce(:+)/x.size, y.reduce(:+)/y.size
@@ -15,6 +15,7 @@ def pearson x, y
 end
 
 genes = open("geneNames.csv"){|f| f.read}.strip.split
+locations = open("gene_locations.csv"){|f| f.read}.strip.split("\n").map{|l| l.split(",")}
 vectors = open("#{layer}-rt.csv"){|f| f.read}.strip.split("\n").map{|l| l.split(",").map{|t| t.to_f}}
 raise unless genes.size == vectors.size
 edges = []
@@ -30,9 +31,16 @@ edges = []
 			elsif percent <= 1.0 - stringency
 				direction = -1
 			end
-			edges << [genes[i], genes[j], direction, corr]
+			distance = -1
+			distance = (locations[i][2].to_i - locations[j][2].to_i).abs if locations[i][1] == locations[j][1]
+			distant = 1
+			distant = 0 if locations[i][1] == locations[j][1] and distance < dist_thresh
+			edges << [genes[i], genes[j], direction, corr, distant, distance]
 		end
 	end
 end
 
-open("#{layer}/network.txt", "w"){|f| f.puts edges.map{|e| e.join "\t"}.join("\n")}
+open("#{layer}/network.txt", "w") do |f| 
+	f.puts ["Gene1", "Gene2", "Direction", "Correlation", "Distant?", "Distance"].map{|c| sprintf "%-13s", c}.join
+	f.puts edges.map{|e| e.map{|c| sprintf "%-13s", c.to_s}.join}.join("\n")
+end
