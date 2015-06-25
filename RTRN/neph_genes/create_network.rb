@@ -2,7 +2,7 @@
 #based on the given pearson threshold for creating an edge,
 #and the given stringency to compare for deciding direction
 
-layer, corr_thresh, stringency, dist_thresh = ARGV #e.g. allderm 0.75 0.75 5000000
+layer, corr_thresh, stringency, dist_thresh = ARGV #e.g. allderm 0.75 0.75 500000
 corr_thresh, stringency, dist_thresh = corr_thresh.to_f, stringency.to_f, dist_thresh.to_i
 
 def pearson x, y
